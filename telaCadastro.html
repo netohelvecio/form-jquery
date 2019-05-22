@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <form id="idForm">
+        <label for="nome">Digite seu nome:</label>
+        <input type="text" name="nome" id="nome" onkeyup="validaCampos();"> <br>
+
+        <label for="email">Digite seu email:</label>
+        <input type="email" name="email" id="email" onkeyup="validaCampos();"> <br>
+
+        <label for="idade">Digite seu idade:</label>
+        <input type="text" name="idade" id="idade" onkeyup="validaCampos();"> <br>
+
+        <input type="submit" value="Enviar" id="btnEnvia" disabled>
+    </form>
+
+    <div id="sucesso"></div>
+
+</body>
+</html>
+
+<script type="text/javascript">
+
+	/*jQuery(document).ready(function(){
+		jQuery('#idForm').submit(function(){
+			var dados = jQuery(this).serialize();
+            $("#btnEnvia").attr("disabled", true);
+
+			jQuery.ajax({
+				type: "POST",
+				url: "cadastra.php",
+                dataType: "json",
+                cache: false,
+                processData: false,
+                contentType: false,
+				data: dados,
+                //timeout: 8000,
+				success: function(data){
+                    $('#sucesso').show();
+                    $('#sucesso').html(data);
+				}
+			});
+			
+			return false;
+		});
+	});*/
+
+    $(document).ready(function (){
+            $("#btnEnvia").click(function (){
+                var form = new FormData($("#idForm")[0]);
+                $("#btnEnvia").attr("disabled", true);
+                $.ajax({
+                    url: 'cadastra.php',
+                    type: 'post',
+                    dataType: 'json',
+                    cache: false,
+                    processData: false,
+                    contentType: false,
+                    data: form,
+                    //timeout: 8000,
+                    success: function(resultado){
+                        $('#sucesso').show();
+                        $("#sucesso").html(resultado);
+                    }
+                });
+        });
+    });
+
+    $(function(){
+        $("#btnEnvia").click(function (){ 
+            $('#idForm input').val(""); 
+            $('#idForm input[type = submit]').val("Enviar");
+            setTimeout(function(){
+		        $('#sucesso').hide();
+	        }, 3000);
+        });
+    });
+
+    function validaCampos(){
+        var nome = document.getElementById("nome");
+        var email = document.getElementById("email");
+        var idade = document.getElementById("idade");
+        var btnEnvia = document.getElementById("btnEnvia");
+
+        if(nome.value != "" && email.value != "" && idade.value != ""){
+            btnEnvia.disabled = false;
+        }else{
+            btnEnvia.disabled = true;        
+        }
+    }
+</script>   
