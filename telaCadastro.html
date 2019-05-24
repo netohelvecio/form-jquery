@@ -28,30 +28,6 @@
 
 <script type="text/javascript">
 
-	/*jQuery(document).ready(function(){
-		jQuery('#idForm').submit(function(){
-			var dados = jQuery(this).serialize();
-            $("#btnEnvia").attr("disabled", true);
-
-			jQuery.ajax({
-				type: "POST",
-				url: "cadastra.php",
-                dataType: "json",
-                cache: false,
-                processData: false,
-                contentType: false,
-				data: dados,
-                //timeout: 8000,
-				success: function(data){
-                    $('#sucesso').show();
-                    $('#sucesso').html(data);
-				}
-			});
-			
-			return false;
-		});
-	});*/
-
     $(document).ready(function (){
             $("#btnEnvia").click(function (){
                 var form = new FormData($("#idForm")[0]);
