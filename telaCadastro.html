@@ -19,6 +19,7 @@
         <input type="text" name="idade" id="idade" onkeyup="validaCampos();"> <br>
 
         <input type="submit" value="Enviar" id="btnEnvia" disabled>
+        <input type='button' value='Voltar' onclick='history.go(-1)' />
     </form>
 
     <div id="sucesso"></div>
@@ -53,6 +54,7 @@
         $("#btnEnvia").click(function (){ 
             $('#idForm input').val(""); 
             $('#idForm input[type = submit]').val("Enviar");
+            $('#idForm input[type = button]').val("Voltar");
             setTimeout(function(){
 		        $('#sucesso').hide();
 	        }, 3000);
